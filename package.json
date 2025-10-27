@@ -1,0 +1,16 @@
+{
+  "name": "ecosystem-landing",
+  "version": "1.0.0",
+  "description": "Landing pages for ecosystem applications",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.0.0"
+  },
+  "dependencies": {
+    "aws-amplify": "^6.0.0"
+  }
+}
