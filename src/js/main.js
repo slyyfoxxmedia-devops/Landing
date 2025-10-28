@@ -16,13 +16,14 @@ class App {
     const signupBtn = document.getElementById('signupBtn');
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const navLinks = document.getElementById('navLinks');
+    const platformButtons = document.querySelectorAll('[data-platform]');
 
     if (loginBtn) {
-      loginBtn.addEventListener('click', () => this.showAuthModal('login'));
+      loginBtn.addEventListener('click', () => this.redirectToAdmin('login'));
     }
     
     if (signupBtn) {
-      signupBtn.addEventListener('click', () => this.showAuthModal('signup'));
+      signupBtn.addEventListener('click', () => this.redirectToAdmin('signup'));
     }
     
     if (mobileMenuToggle && navLinks) {
@@ -30,6 +31,14 @@ class App {
         navLinks.classList.toggle('active');
       });
     }
+
+    platformButtons.forEach(button => {
+      button.addEventListener('click', (e) => {
+        const platform = e.target.dataset.platform;
+        localStorage.setItem('selectedPlatform', platform);
+        this.redirectToAdmin('signup', platform);
+      });
+    });
   }
 
   async checkAuthState() {
@@ -39,9 +48,10 @@ class App {
     }
   }
 
-  showAuthModal(type) {
-    // Redirect to dedicated auth pages or show modal
-    window.location.href = `https://your-auth-domain.auth.us-east-1.amazoncognito.com/${type}`;
+  redirectToAdmin(action, platform = null) {
+    const baseUrl = 'https://admin.slyyfoxxmedia.com';
+    const platformParam = platform ? `?platform=${platform}` : '';
+    window.location.href = `${baseUrl}/${action}${platformParam}`;
   }
 
   updateUIForLoggedInUser(user) {
