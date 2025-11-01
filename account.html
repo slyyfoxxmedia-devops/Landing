@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Account - Ecosystem</title>
+    <link rel="stylesheet" href="src/css/main.css">
+    <link rel="stylesheet" href="src/css/account.css">
+    <link rel="stylesheet" href="src/css/account-forms.css">
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">Ecosystem</a>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="pricing.html">Pricing</a>
+                <a href="account.html" class="active">Account</a>
+                <button id="logout-btn" class="btn-secondary">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="account-container">
+        <div class="account-header">
+            <h1>My Account</h1>
+            <div class="user-info">
+                <div class="user-details">
+                    <h2 id="user-name">Loading...</h2>
+                    <p id="user-id">User ID: Loading...</p>
+                    <span class="member-since" id="member-since">Member since: Loading...</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="account-content">
+            <section class="account-settings">
+                <h3>Account Settings</h3>
+                <div class="settings-grid">
+                    <button class="setting-btn" onclick="showSection('profile')">Edit Profile</button>
+                    <button class="setting-btn" onclick="showSection('notifications')">Notifications</button>
+                    <button class="setting-btn" onclick="showSection('billing')">Billing History</button>
+                    <button class="setting-btn" onclick="showSection('support')">Support</button>
+                </div>
+            </section>
+
+            <!-- Profile Edit Section -->
+            <section id="profile-section" class="settings-section" style="display: none;">
+                <h3>Edit Profile</h3>
+                <form id="profile-form">
+                    <div class="form-group">
+                        <label>Name:</label>
+                        <input type="text" id="profile-name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Email:</label>
+                        <input type="email" id="profile-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Phone:</label>
+                        <input type="tel" id="profile-phone">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Save Changes</button>
+                        <button type="button" class="btn-secondary" onclick="hideAllSections()">Cancel</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- Notifications Section -->
+            <section id="notifications-section" class="settings-section" style="display: none;">
+                <h3>Notification Settings</h3>
+                <div class="notification-settings">
+                    <div class="setting-item">
+                        <label>Email Notifications</label>
+                        <input type="checkbox" id="email-notifications" checked>
+                    </div>
+                    <div class="setting-item">
+                        <label>SMS Notifications</label>
+                        <input type="checkbox" id="sms-notifications">
+                    </div>
+                    <div class="setting-item">
+                        <label>Marketing Emails</label>
+                        <input type="checkbox" id="marketing-emails">
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn-primary" onclick="saveNotifications()">Save Settings</button>
+                        <button class="btn-secondary" onclick="hideAllSections()">Cancel</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Billing Section -->
+            <section id="billing-section" class="settings-section" style="display: none;">
+                <h3>Billing History</h3>
+                <div id="billing-table">
+                    <!-- Dynamic billing content -->
+                </div>
+                <button class="btn-secondary" onclick="hideAllSections()">Close</button>
+            </section>
+
+            <!-- Support Section -->
+            <section id="support-section" class="settings-section" style="display: none;">
+                <h3>Contact Support</h3>
+                <form id="support-form">
+                    <div class="form-group">
+                        <label>Subject:</label>
+                        <input type="text" id="support-subject" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Message:</label>
+                        <textarea id="support-message" rows="5" required></textarea>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="btn-primary">Send Message</button>
+                        <button type="button" class="btn-secondary" onclick="hideAllSections()">Cancel</button>
+                    </div>
+                </form>
+            </section>
+
+            <section class="subscriptions-section">
+                <h3>Active Subscriptions</h3>
+                <div id="active-subscriptions" class="subscription-grid">
+                    <!-- Dynamic content -->
+                </div>
+            </section>
+
+            <section class="available-apps">
+                <h3>Available Applications</h3>
+                <div id="available-apps" class="apps-grid">
+                    <!-- Dynamic content -->
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="src/js/account.js"></script>
+</body>
+</html>

@@ -1,5 +1,4 @@
-import './amplify-config.js';
-import { AuthService } from './auth.js';
+// Removed Amplify imports - auth handled by admin panel
 
 class App {
   constructor() {
@@ -12,16 +11,11 @@ class App {
   }
 
   setupEventListeners() {
-    const loginBtn = document.getElementById('loginBtn');
     const signupBtn = document.getElementById('signupBtn');
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
     const navLinks = document.getElementById('navLinks');
     const platformButtons = document.querySelectorAll('[data-platform]');
 
-    if (loginBtn) {
-      loginBtn.addEventListener('click', () => this.redirectToAdmin('login'));
-    }
-    
     if (signupBtn) {
       signupBtn.addEventListener('click', () => this.redirectToAdmin('signup'));
     }
@@ -39,18 +33,35 @@ class App {
         this.redirectToAdmin('signup', platform);
       });
     });
+
+    // Products dropdown
+    const productsToggle = document.getElementById('productsToggle');
+    const productsMenu = document.getElementById('productsMenu');
+    
+    if (productsToggle && productsMenu) {
+      productsToggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        productsMenu.classList.toggle('show');
+      });
+      
+      // Close dropdown when clicking outside
+      document.addEventListener('click', (e) => {
+        if (!productsToggle.contains(e.target) && !productsMenu.contains(e.target)) {
+          productsMenu.classList.remove('show');
+        }
+      });
+    }
   }
 
   async checkAuthState() {
-    const result = await AuthService.getCurrentUser();
-    if (result.success) {
-      this.updateUIForLoggedInUser(result.user);
-    }
+    // Auth state will be checked via admin panel API
+    // TODO: Implement admin panel auth check
   }
 
   redirectToAdmin(action, platform = null) {
     const baseUrl = 'https://admin.slyyfoxxmedia.com';
     const platformParam = platform ? `?platform=${platform}` : '';
+    // Change 'signup' to whatever route name you use in admin panel
     window.location.href = `${baseUrl}/${action}${platformParam}`;
   }
 
@@ -63,7 +74,7 @@ class App {
       `;
       
       document.getElementById('logoutBtn').addEventListener('click', async () => {
-        await AuthService.logout();
+        // TODO: Implement admin panel logout
         location.reload();
       });
     }

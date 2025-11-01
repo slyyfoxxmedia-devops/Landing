@@ -332,20 +332,10 @@ body::after {
   z-index: 999;
 }
 
-.dropdown:hover .dropdown-menu,
-.dropdown-menu:hover {
+.dropdown-menu.show {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
-  transition-delay: 0s;
-}
-
-.dropdown-menu {
-  transition-delay: 0.15s;
-}
-
-.dropdown:hover .dropdown-menu {
-  transition-delay: 0s;
 }
 
 .dropdown-menu li {
